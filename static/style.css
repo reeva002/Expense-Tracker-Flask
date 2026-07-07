@@ -1,0 +1,91 @@
+body {
+    background-color: #f3f4f6;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 550px;
+    max-width: 95%;
+    margin: 30px auto;
+}
+
+h1 { text-align: center; color: #333; }
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.total-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+}
+
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: block;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover { background-color: #059669; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    table-layout: fixed;   /* Important */
+}
+
+th {
+    text-align: left;
+    color: #666;
+    padding-bottom: 10px;
+}
+
+td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #eee;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.amount {
+    color: #ef4444;
+    font-weight: bold;
+    text-align: right;
+    white-space: nowrap;   /* Keep ₹1000 on one line */
+}
+.tag {
+    background: #e0f2fe; color: #0284c7;
+    padding: 4px 8px; border-radius: 12px; font-size: 12px;
+}
+th:nth-child(3),
+td:nth-child(3) {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.amount {
+    text-align: left;
+}

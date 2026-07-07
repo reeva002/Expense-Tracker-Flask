@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>My Expense Tracker</h1>
+
+        <!-- 1. Check if Over Budget -->
+        {% if total > 5000 %}
+            <div class="card total-card" style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">
+                <h3>Total Spent</h3>
+                <h2 id="total">₹ {{ total }}</h2>
+                <p style="margin-top: 5px; font-weight: bold;">Over Budget!</p>
+            </div>
+            
+        <!-- 2. Else (Normal Budget) -->
+        {% else %}
+            <div class="card total-card" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                <h3>Total Spent</h3>
+                <h2 id="total">₹ {{ total }}</h2>
+                <p style="margin-top: 5px;">Within Budget</p>
+            </div>
+        {% endif %}
+
+        <!-- ADD FORM -->
+        <div class="card form-card">
+            <form action="/add" method="POST">
+                <input type="text" name="item" placeholder="Item Name (e.g. Pizza)" required>
+                <input type="number" name="amount" placeholder="Amount (₹)" required>
+                
+                <p style="font-size: 13px; color: gray;">
+                    Category will be predicted by AI automatically
+                </p>
+              
+                <button type="submit">Add Expense</button>
+            </form>
+        </div>
+
+        <div style="margin-top:20px; text-align:center;">
+            <button type="button" onclick="getAIInsights()">✨ AI Insights</button>
+
+            <div id="ai-result" style="margin-top:15px;"></div>
+        </div>
+
+        <!-- EXPENSE LIST -->
+        <h3>Recent Transactions</h3>
+        <div style="text-align: right; margin-bottom: 10px;">
+            <a href="/clear" style="color: red; text-decoration: none; font-size: 12px;">Reset All</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.item }}</td>
+                    <td><span class="tag">{{ expense.category }}</span></td>
+                    <td class="amount">- ₹{{ expense.amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+    async function getAIInsights() {
+    try {
+        const response = await fetch("/ai");
+        const data = await response.text();
+
+        document.getElementById("ai-result").innerHTML = data;
+    } catch (error) {
+        document.getElementById("ai-result").innerHTML =
+            "Error fetching AI insights.";
+    }
+    }
+    </script>
+</body>
+</html>
